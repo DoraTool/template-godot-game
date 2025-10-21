@@ -1,0 +1,182 @@
+[gd_scene load_steps=3 format=3 uid="uid://game_complete_scene"]
+
+[ext_resource type="Script" path="res://scripts/scenes/game_complete_scene.gd" id="1_complete"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_stats_bg"]
+bg_color = Color(0.15, 0.35, 0.25, 0.8)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(0.2, 1, 0.6, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+
+[node name="GameComplete" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_complete")
+
+[node name="BackgroundColor" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.08, 0.15, 0.12, 1)
+
+[node name="GradientOverlay" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="CenterContainer" type="CenterContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer"]
+layout_mode = 2
+theme_override_constants/separation = 35
+alignment = 1
+
+[node name="TitleLabel" type="Label" parent="CenterContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.2, 1, 0.6, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 8
+theme_override_font_sizes/font_size = 80
+text = "GAME COMPLETE!"
+horizontal_alignment = 1
+
+[node name="SubtitleLabel" type="Label" parent="CenterContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.8, 0.9, 1, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 4
+theme_override_font_sizes/font_size = 32
+text = "Congratulations! You completed all levels!"
+horizontal_alignment = 1
+
+[node name="Spacer1" type="Control" parent="CenterContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 30)
+layout_mode = 2
+
+[node name="StatsPanel" type="PanelContainer" parent="CenterContainer/VBoxContainer"]
+layout_mode = 2
+custom_minimum_size = Vector2(550, 240)
+theme_override_styles/panel = SubResource("StyleBoxFlat_stats_bg")
+
+[node name="MarginContainer" type="MarginContainer" parent="CenterContainer/VBoxContainer/StatsPanel"]
+layout_mode = 1
+theme_override_constants/margin_left = 30
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 30
+theme_override_constants/margin_bottom = 20
+
+[node name="StatsVBox" type="VBoxContainer" parent="CenterContainer/VBoxContainer/StatsPanel/MarginContainer"]
+layout_mode = 1
+theme_override_constants/separation = 18
+
+[node name="TotalTimeStat" type="HBoxContainer" parent="CenterContainer/VBoxContainer/StatsPanel/MarginContainer/StatsVBox"]
+layout_mode = 2
+alignment = 1
+
+[node name="TotalTimeLabel" type="Label" parent="CenterContainer/VBoxContainer/StatsPanel/MarginContainer/StatsVBox/TotalTimeStat"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.7, 0.8, 0.9, 1)
+theme_override_font_sizes/font_size = 24
+text = "Total Time:"
+
+[node name="TotalTimeValue" type="Label" parent="CenterContainer/VBoxContainer/StatsPanel/MarginContainer/StatsVBox/TotalTimeStat"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.2, 1, 0.6, 1)
+theme_override_font_sizes/font_size = 24
+text = "45m 32s"
+
+[node name="TotalScoreStat" type="HBoxContainer" parent="CenterContainer/VBoxContainer/StatsPanel/MarginContainer/StatsVBox"]
+layout_mode = 2
+alignment = 1
+
+[node name="TotalScoreLabel" type="Label" parent="CenterContainer/VBoxContainer/StatsPanel/MarginContainer/StatsVBox/TotalScoreStat"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.7, 0.8, 0.9, 1)
+theme_override_font_sizes/font_size = 24
+text = "Total Score:"
+
+[node name="TotalScoreValue" type="Label" parent="CenterContainer/VBoxContainer/StatsPanel/MarginContainer/StatsVBox/TotalScoreStat"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.2, 1, 0.6, 1)
+theme_override_font_sizes/font_size = 24
+text = "128,450"
+
+[node name="LevelsStat" type="HBoxContainer" parent="CenterContainer/VBoxContainer/StatsPanel/MarginContainer/StatsVBox"]
+layout_mode = 2
+alignment = 1
+
+[node name="LevelsLabel" type="Label" parent="CenterContainer/VBoxContainer/StatsPanel/MarginContainer/StatsVBox/LevelsStat"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.7, 0.8, 0.9, 1)
+theme_override_font_sizes/font_size = 24
+text = "Levels Completed:"
+
+[node name="LevelsValue" type="Label" parent="CenterContainer/VBoxContainer/StatsPanel/MarginContainer/StatsVBox/LevelsStat"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.2, 1, 0.6, 1)
+theme_override_font_sizes/font_size = 24
+text = "10/10"
+
+[node name="TotalEnemiesStat" type="HBoxContainer" parent="CenterContainer/VBoxContainer/StatsPanel/MarginContainer/StatsVBox"]
+layout_mode = 2
+alignment = 1
+
+[node name="TotalEnemiesLabel" type="Label" parent="CenterContainer/VBoxContainer/StatsPanel/MarginContainer/StatsVBox/TotalEnemiesStat"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.7, 0.8, 0.9, 1)
+theme_override_font_sizes/font_size = 24
+text = "Total Enemies Defeated:"
+
+[node name="TotalEnemiesValue" type="Label" parent="CenterContainer/VBoxContainer/StatsPanel/MarginContainer/StatsVBox/TotalEnemiesStat"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.2, 1, 0.6, 1)
+theme_override_font_sizes/font_size = 24
+text = "142"
+
+[node name="Spacer2" type="Control" parent="CenterContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 30)
+layout_mode = 2
+
+[node name="ButtonHBox" type="HBoxContainer" parent="CenterContainer/VBoxContainer"]
+layout_mode = 2
+alignment = 1
+theme_override_constants/separation = 40
+
+[node name="RestartButton" type="Button" parent="CenterContainer/VBoxContainer/ButtonHBox"]
+layout_mode = 2
+custom_minimum_size = Vector2(150, 60)
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 24
+text = "Restart"
+
+[node name="MenuButton" type="Button" parent="CenterContainer/VBoxContainer/ButtonHBox"]
+layout_mode = 2
+custom_minimum_size = Vector2(150, 60)
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 24
+text = "Main Menu"
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+bus = &"Master"
