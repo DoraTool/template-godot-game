@@ -5,15 +5,14 @@ extends Node
 
 ## 重置精灵的原点和碰撞体偏移
 ## 根据当前动画配置自动调整精灵的原点和碰撞体位置
-## @param sprite: AnimatedSprite2D 或 Sprite2D 节点
-## @param animations_data: 动画配置数据 (Dictionary)
-## @param collision_shape: CollisionShape2D 节点 (可选)
-## @param facing_direction: 朝向方向 ("up", "down", "left", "right")
+## @param character_body: CharacterBody2D (角色节点，包含 animated_sprite 和 anim_data)
+## @param facing_direction: 朝向方向 ("left" or "right" for side-view game)
 func reset_origin_and_offset(
     sprite: Node2D, 
-    animations_data: Dictionary, 
-    collision_shape: CollisionShape2D = null,
-    facing_direction: String = "right"
+    animations_data: Dictionary,
+    anim_key: String,
+    facing_direction: String = "front",
+    collision_shape: CollisionShape2D = null
 ) -> void:
     # 检查场景是否激活
     if not sprite.is_inside_tree():
@@ -32,12 +31,8 @@ func reset_origin_and_offset(
     var base_origin_x = 0.5
     var base_origin_y = 1.0
     
-    # 获取当前动画的原点配置
-    var current_anim_name = ""
-    if sprite is AnimatedSprite2D:
-        current_anim_name = sprite.animation
-    elif sprite.has_method("get_current_animation"):
-        current_anim_name = sprite.get_current_animation()
+    # 获取当前动画的原点配置，使用传入的 anim_key
+    var current_anim_name = anim_key
     
     if current_anim_name != "":
         var anims = animations_data.get("anims", [])
@@ -48,8 +43,8 @@ func reset_origin_and_offset(
                 break
     
     # 验证朝向方向
-    if facing_direction not in ["up", "down", "left", "right"]:
-        push_error("facing_direction only supports: up, down, left, right")
+    if facing_direction not in ["up", "down", "left", "right", "front", "back"]:
+        push_error("facing_direction only supports: up, down, left, right, front, back")
         return
     
     # 根据朝向调整原点
