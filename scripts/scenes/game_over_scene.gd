@@ -66,11 +66,7 @@ func _on_button_pressed(btn: Button) -> void:
 
 func _play_gameover_sound() -> void:
 	"""Play game over sound effect"""
-	if NetworkResourceLoader.is_cached("game_over_sound"):
-		var sound = NetworkResourceLoader.get_cached_resource("game_over_sound")
-		if sound:
-			audio_player.stream = sound
-			audio_player.play()
+	
 
 
 func _update_stats_display() -> void:
