@@ -7,7 +7,6 @@ extends Node
 const LEVEL_ORDER: PackedStringArray = [
 	"res://scenes/level1.tscn",
 	"res://scenes/level2.tscn",
-	"res://scenes/level3.tscn"
 ]
 
 ## Get the key of the next level scene

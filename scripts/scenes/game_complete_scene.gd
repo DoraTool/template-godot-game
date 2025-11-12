@@ -68,11 +68,7 @@ func _on_button_pressed(btn: Button) -> void:
 
 func _play_completion_sound() -> void:
 	"""Play victory fanfare sound for game completion"""
-	if NetworkResourceLoader.is_cached("victory_fanfare"):
-		var sound = NetworkResourceLoader.get_cached_resource("victory_fanfare")
-		if sound:
-			audio_player.stream = sound
-			audio_player.play()
+	
 
 
 func _update_stats_display() -> void:

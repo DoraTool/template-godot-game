@@ -11,12 +11,6 @@ var can_start: bool = true
 
 
 func _ready() -> void:
-	# Load game title logo if available
-	# if NetworkResourceLoader.is_cached("game_title"):
-	# 	var texture = NetworkResourceLoader.get_cached_resource("game_title")
-	# 	if texture:
-	# 		logo_sprite.texture = texture
-	
 	# Connect timer signal for blinking effect
 	blink_timer.timeout.connect(_on_blink_timer_timeout)
 	
@@ -130,15 +124,4 @@ func _play_exit_animation() -> void:
 
 func _play_click_sound() -> void:
 	"""Play UI click sound effect"""
-	if NetworkResourceLoader.is_cached("ui_click"):
-		var sound = NetworkResourceLoader.get_cached_resource("ui_click")
-		if sound:
-			var audio_player = AudioStreamPlayer.new()
-			audio_player.stream = sound
-			audio_player.bus = &"Master"
-			add_child(audio_player)
-			audio_player.play()
-			
-			# Clean up after sound finishes
-			await audio_player.finished
-			audio_player.queue_free()
+	
