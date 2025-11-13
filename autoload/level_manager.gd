@@ -6,8 +6,11 @@ extends Node
 # Level order list - Define all levels in the order they should be played
 const LEVEL_ORDER: PackedStringArray = [
 	"res://scenes/level1.tscn",
-	"res://scenes/level2.tscn",
+	"res://scenes/level2.tscn"
 ]
+
+# Current level tracking
+var current_level_path: String = ""
 
 ## Get the key of the next level scene
 ## Returns null if current level is not found or if it's the last level
@@ -43,3 +46,32 @@ func get_level_count() -> int:
 ## Get current level index
 func get_level_index(scene_key: String) -> int:
 	return LEVEL_ORDER.find(scene_key)
+
+## Start the game from the first level
+func start_game() -> void:
+	if LEVEL_ORDER.size() > 0:
+		current_level_path = LEVEL_ORDER[0]
+		get_tree().change_scene_to_file(current_level_path)
+
+## Go to the next level
+func go_to_next_level() -> void:
+	var next_level = get_next_level_scene(current_level_path)
+	if next_level != "":
+		current_level_path = next_level
+		get_tree().change_scene_to_file(current_level_path)
+	else:
+		# Game complete
+		get_tree().change_scene_to_file("res://scenes/game_complete.tscn")
+
+## Restart current level
+func restart_current_level() -> void:
+	if current_level_path != "":
+		get_tree().change_scene_to_file(current_level_path)
+
+## Go to title screen
+func go_to_title() -> void:
+	get_tree().change_scene_to_file("res://scenes/title_screen.tscn")
+
+## Handle player death
+func player_died() -> void:
+	get_tree().change_scene_to_file("res://scenes/game_over.tscn")
