@@ -6,7 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://524y2i0nnx8a" path="res://gambo_theme/ui/3d_style/container_3d_slot.png" id="2_8k24d"]
 [ext_resource type="Texture2D" uid="uid://b1qjy2mxr3c6p" path="res://gambo_theme/ui/3d_style/container_3d_clickable.png" id="2_xkd6p"]
 [ext_resource type="Texture2D" uid="uid://bphfkdni27kl4" path="res://gambo_theme/ui/pixel_style/container_pixel_clickable.png" id="2_y3vgn"]
-[ext_resource type="FontFile" uid="uid://bpu4ewcnyw1qt" path="res://template-playground/public/assets/fronts/supercell-magic_0.ttf" id="4_1u482"]
+[ext_resource type="FontFile" uid="uid://bpu4ewcnyw1qt" path="res://gambo_theme/fronts/supercell-magic_0.ttf" id="4_1u482"]
 [ext_resource type="Script" uid="uid://31yg2jqhd5bl" path="res://gambo_theme/gambo.gd" id="4_7bd8y"]
 [ext_resource type="Script" uid="uid://dt2m2he3hplbu" path="res://gambo_theme/styles/style_box_pixel_container.gd" id="7_k2n3a"]
 [ext_resource type="Texture2D" uid="uid://buv3vru6h0ccl" path="res://gambo_theme/ui/pixel_style/container_pixel.png" id="8_tob56"]
