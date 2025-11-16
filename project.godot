@@ -10,16 +10,6 @@ config_version=5
 
 [application]
 
-config/name="godot-game-4"
-run/main_scene="res://scenes/title_screen.tscn"
-config/features=PackedStringArray("4.5", "GL Compatibility")
+config/name="godot-template"
+config/features=PackedStringArray("4.5", "Forward Plus")
 config/icon="res://icon.svg"
-
-[autoload]
-LevelManager="*res://autoload/level_manager.gd"
-Utils="*res://autoload/utils.gd"
-
-[rendering]
-
-renderer/rendering_method="gl_compatibility"
-renderer/rendering_method.mobile="gl_compatibility"
