@@ -123,15 +123,14 @@ func _on_restart_pressed() -> void:
 	"""Restart the entire game"""
 	await get_tree().create_timer(0.3).timeout
 	print("Restart button pressed - Restart entire game")
-	# TODO: Reset game state and return to first level
-	get_tree().change_scene_to_file("res://scenes/title_screen.tscn")
+	LevelManager.restart_game()
 
 
 func _on_menu_pressed() -> void:
 	"""Return to main menu"""
 	await get_tree().create_timer(0.3).timeout
 	print("Menu button pressed - Return to title")
-	get_tree().change_scene_to_file("res://scenes/title_screen.tscn")
+	LevelManager.go_to_title()
 
 
 ## Public method to set game completion stats
