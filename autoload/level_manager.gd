@@ -75,3 +75,6 @@ func go_to_title() -> void:
 ## Handle player death
 func player_died() -> void:
 	get_tree().change_scene_to_file("res://scenes/game_over.tscn")
+
+func restart_game() -> void:
+	go_to_title()

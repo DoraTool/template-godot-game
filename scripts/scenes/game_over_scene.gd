@@ -112,16 +112,14 @@ func _on_retry_pressed() -> void:
 	"""Retry the current level"""
 	await get_tree().create_timer(0.3).timeout
 	print("Retry button pressed - Restart level %d" % level_number)
-	# TODO: Implement level restart logic
-	# For now, reload the game over scene (placeholder behavior)
-	get_tree().change_scene_to_file("res://scenes/game_over.tscn")
+	LevelManager.restart_current_level()
 
 
 func _on_menu_pressed() -> void:
 	"""Return to main menu"""
 	await get_tree().create_timer(0.3).timeout
 	print("Menu button pressed - Return to title")
-	get_tree().change_scene_to_file("res://scenes/title_screen.tscn")
+	LevelManager.go_to_title()
 
 
 ## Public method to set game over stats from game level

@@ -40,14 +40,6 @@ func _process(_delta: float) -> void:
 	# Check for ENTER key press to start game
 	if Input.is_action_just_pressed("ui_accept") and can_start:
 		_on_start_game_pressed()
-	
-	# Check for P key press to jump to Level 2 (debug/shortcut)
-	if Input.is_key_pressed(KEY_P) and can_start:
-		_on_level2_pressed()
-	
-	# Check for L key press to jump to Level 3 (debug/shortcut)
-	if Input.is_key_pressed(KEY_L) and can_start:
-		_on_level3_pressed()
 
 
 func _on_blink_timer_timeout() -> void:
@@ -75,36 +67,6 @@ func _on_start_game_pressed() -> void:
 		# Fallback: load loading scene if no levels defined
 		push_error("No levels defined in LevelManager")
 		get_tree().change_scene_to_file("res://scenes/loading.tscn")
-
-
-func _on_level2_pressed() -> void:
-	"""Handle P key press to jump directly to Level 2"""
-	can_start = false
-	blink_timer.stop()
-	
-	# Play button click sound if available
-	_play_click_sound()
-	
-	# Animate out before transition
-	await _play_exit_animation()
-	
-	# Jump directly to Level 2
-	get_tree().change_scene_to_file("res://scenes/level2.tscn")
-
-
-func _on_level3_pressed() -> void:
-	"""Handle L key press to jump directly to Level 3"""
-	can_start = false
-	blink_timer.stop()
-	
-	# Play button click sound if available
-	_play_click_sound()
-	
-	# Animate out before transition
-	await _play_exit_animation()
-	
-	# Jump directly to Level 3
-	get_tree().change_scene_to_file("res://scenes/level3.tscn")
 
 
 func _play_exit_animation() -> void:

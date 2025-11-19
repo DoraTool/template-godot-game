@@ -113,24 +113,22 @@ func _on_focus_changed(_control: Control) -> void:
 func _on_next_level_pressed() -> void:
 	"""Navigate to next level"""
 	await get_tree().create_timer(0.3).timeout
-	# TODO: Load next level scene
 	print("Next Level button pressed - Load next level")
-	get_tree().change_scene_to_file("res://scenes/game_over.tscn")  # Placeholder
-
+	LevelManager.go_to_next_level()
 
 func _on_retry_pressed() -> void:
 	"""Retry current level"""
 	await get_tree().create_timer(0.3).timeout
 	# TODO: Reload current level scene
 	print("Retry button pressed - Restart level")
-	get_tree().change_scene_to_file("res://scenes/title_screen.tscn")  # Placeholder
+	LevelManager.restart_current_level()
 
 
 func _on_menu_pressed() -> void:
 	"""Return to main menu"""
 	await get_tree().create_timer(0.3).timeout
 	print("Menu button pressed - Return to title")
-	get_tree().change_scene_to_file("res://scenes/title_screen.tscn")
+	LevelManager.go_to_title()
 
 
 ## Public method to set victory stats from game level
