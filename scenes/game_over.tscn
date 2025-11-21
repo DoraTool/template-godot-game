@@ -1,46 +1,32 @@
-[gd_scene load_steps=3 format=3 uid="uid://game_over_scene"]
+[gd_scene load_steps=4 format=3 uid="uid://game_over_scene"]
 
-[ext_resource type="Script" path="res://scripts/scenes/game_over_scene.gd" id="1_over"]
+[ext_resource type="Script" path="res://scripts/scenes/game_over_scene.gd" id="1_game_over"]
+[ext_resource type="Theme" uid="uid://btaojad5x07kh" path="res://gambo_theme/gambo.tres" id="2_theme"]
+[ext_resource type="FontFile" uid="uid://5itffadvgojq" path="res://gambo_theme/fonts/retro-pixel-arcade.otf.woff2" id="3_font"]
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_stats_bg"]
-bg_color = Color(0.35, 0.15, 0.15, 0.8)
-border_width_left = 3
-border_width_top = 3
-border_width_right = 3
-border_width_bottom = 3
-border_color = Color(1, 0.3, 0.3, 1)
-corner_radius_top_left = 8
-corner_radius_top_right = 8
-corner_radius_bottom_right = 8
-corner_radius_bottom_left = 8
+[node name="GameOver" type="CanvasLayer"]
+layer = 100
+script = ExtResource("1_game_over")
 
-[node name="GameOver" type="Control"]
+[node name="Control" type="Control" parent="."]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-script = ExtResource("1_over")
+theme = ExtResource("2_theme")
 
-[node name="BackgroundColor" type="ColorRect" parent="."]
+[node name="BackgroundColor" type="ColorRect" parent="Control"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-color = Color(0.15, 0.08, 0.08, 1)
+color = Color(0.2, 0, 0, 0.8)
 
-[node name="GradientOverlay" type="Control" parent="."]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="CenterContainer" type="CenterContainer" parent="."]
+[node name="CenterContainer" type="CenterContainer" parent="Control"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -48,119 +34,48 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="Control/CenterContainer"]
 layout_mode = 2
-theme_override_constants/separation = 40
+theme_override_constants/separation = 64
 alignment = 1
 
-[node name="TitleLabel" type="Label" parent="CenterContainer/VBoxContainer"]
+[node name="GameOverTitle" type="Label" parent="Control/CenterContainer/VBoxContainer"]
 layout_mode = 2
-theme_override_colors/font_color = Color(1, 0.3, 0.3, 1)
+theme_override_colors/font_color = Color(1, 0.31, 0.31, 1)
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
-theme_override_constants/outline_size = 8
+theme_override_constants/outline_size = 4
+theme_override_fonts/font = ExtResource("3_font")
 theme_override_font_sizes/font_size = 80
 text = "GAME OVER"
 horizontal_alignment = 1
 
-[node name="SubtitleLabel" type="Label" parent="CenterContainer/VBoxContainer"]
+[node name="FailureText" type="Label" parent="Control/CenterContainer/VBoxContainer"]
 layout_mode = 2
-theme_override_colors/font_color = Color(0.8, 0.9, 1, 1)
+theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
-theme_override_constants/outline_size = 4
+theme_override_constants/outline_size = 2
+theme_override_fonts/font = ExtResource("3_font")
 theme_override_font_sizes/font_size = 36
-text = "You were defeated! Try again."
+text = "Your gundam has been destroyed!"
 horizontal_alignment = 1
 
-[node name="Spacer1" type="Control" parent="CenterContainer/VBoxContainer"]
-custom_minimum_size = Vector2(0, 30)
+[node name="PressEnterText" type="Label" parent="Control/CenterContainer/VBoxContainer"]
 layout_mode = 2
+theme_override_colors/font_color = Color(1, 0.84, 0, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 3
+theme_override_fonts/font = ExtResource("3_font")
+theme_override_font_sizes/font_size = 36
+text = "PRESS ENTER TO RESTART"
+horizontal_alignment = 1
 
-[node name="StatsPanel" type="PanelContainer" parent="CenterContainer/VBoxContainer"]
-layout_mode = 2
-custom_minimum_size = Vector2(500, 200)
-theme_override_styles/panel = SubResource("StyleBoxFlat_stats_bg")
+[node name="BlinkTimer" type="Timer" parent="Control"]
+wait_time = 0.8
+autostart = true
 
-[node name="MarginContainer" type="MarginContainer" parent="CenterContainer/VBoxContainer/StatsPanel"]
-layout_mode = 1
-theme_override_constants/margin_left = 30
-theme_override_constants/margin_top = 20
-theme_override_constants/margin_right = 30
-theme_override_constants/margin_bottom = 20
+[node name="DangerBlinkTimer" type="Timer" parent="Control"]
+wait_time = 0.5
+autostart = true
 
-[node name="StatsVBox" type="VBoxContainer" parent="CenterContainer/VBoxContainer/StatsPanel/MarginContainer"]
-layout_mode = 1
-theme_override_constants/separation = 15
-
-[node name="LevelStat" type="HBoxContainer" parent="CenterContainer/VBoxContainer/StatsPanel/MarginContainer/StatsVBox"]
-layout_mode = 2
-alignment = 1
-
-[node name="LevelLabel" type="Label" parent="CenterContainer/VBoxContainer/StatsPanel/MarginContainer/StatsVBox/LevelStat"]
-layout_mode = 2
-theme_override_colors/font_color = Color(0.7, 0.8, 0.9, 1)
-theme_override_font_sizes/font_size = 24
-text = "Level:"
-
-[node name="LevelValue" type="Label" parent="CenterContainer/VBoxContainer/StatsPanel/MarginContainer/StatsVBox/LevelStat"]
-layout_mode = 2
-theme_override_colors/font_color = Color(1, 0.5, 0.5, 1)
-theme_override_font_sizes/font_size = 24
-text = "3"
-
-[node name="TimeStat" type="HBoxContainer" parent="CenterContainer/VBoxContainer/StatsPanel/MarginContainer/StatsVBox"]
-layout_mode = 2
-alignment = 1
-
-[node name="TimeLabel" type="Label" parent="CenterContainer/VBoxContainer/StatsPanel/MarginContainer/StatsVBox/TimeStat"]
-layout_mode = 2
-theme_override_colors/font_color = Color(0.7, 0.8, 0.9, 1)
-theme_override_font_sizes/font_size = 24
-text = "Time Survived:"
-
-[node name="TimeValue" type="Label" parent="CenterContainer/VBoxContainer/StatsPanel/MarginContainer/StatsVBox/TimeStat"]
-layout_mode = 2
-theme_override_colors/font_color = Color(1, 0.5, 0.5, 1)
-theme_override_font_sizes/font_size = 24
-text = "1m 23s"
-
-[node name="ScoreStat" type="HBoxContainer" parent="CenterContainer/VBoxContainer/StatsPanel/MarginContainer/StatsVBox"]
-layout_mode = 2
-alignment = 1
-
-[node name="ScoreLabel" type="Label" parent="CenterContainer/VBoxContainer/StatsPanel/MarginContainer/StatsVBox/ScoreStat"]
-layout_mode = 2
-theme_override_colors/font_color = Color(0.7, 0.8, 0.9, 1)
-theme_override_font_sizes/font_size = 24
-text = "Score Before Defeat:"
-
-[node name="ScoreValue" type="Label" parent="CenterContainer/VBoxContainer/StatsPanel/MarginContainer/StatsVBox/ScoreStat"]
-layout_mode = 2
-theme_override_colors/font_color = Color(1, 0.5, 0.5, 1)
-theme_override_font_sizes/font_size = 24
-text = "4,250"
-
-[node name="Spacer2" type="Control" parent="CenterContainer/VBoxContainer"]
-custom_minimum_size = Vector2(0, 30)
-layout_mode = 2
-
-[node name="ButtonHBox" type="HBoxContainer" parent="CenterContainer/VBoxContainer"]
-layout_mode = 2
-alignment = 1
-theme_override_constants/separation = 40
-
-[node name="RetryButton" type="Button" parent="CenterContainer/VBoxContainer/ButtonHBox"]
-layout_mode = 2
-custom_minimum_size = Vector2(150, 60)
-theme_override_colors/font_color = Color(1, 1, 1, 1)
-theme_override_font_sizes/font_size = 24
-text = "Retry"
-
-[node name="MenuButton" type="Button" parent="CenterContainer/VBoxContainer/ButtonHBox"]
-layout_mode = 2
-custom_minimum_size = Vector2(150, 60)
-theme_override_colors/font_color = Color(1, 1, 1, 1)
-theme_override_font_sizes/font_size = 24
-text = "Main Menu"
-
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="Control"]
 bus = &"Master"

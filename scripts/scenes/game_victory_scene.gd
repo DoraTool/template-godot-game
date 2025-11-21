@@ -1,149 +1,142 @@
-extends Control
+extends CanvasLayer
 
-## Game Victory Scene Script
-## Displays victory screen with stats and navigation options
+# Signal emitted when player wants to proceed to next level
+signal proceed_to_next_level_requested
 
-@onready var next_level_button: Button = $CenterContainer/VBoxContainer/ButtonHBox/NextLevelButton
-@onready var retry_button: Button = $CenterContainer/VBoxContainer/ButtonHBox/RetryButton
-@onready var menu_button: Button = $CenterContainer/VBoxContainer/ButtonHBox/MenuButton
-@onready var audio_player: AudioStreamPlayer = $AudioStreamPlayer
+@onready var victory_title: Label = $Control/CenterContainer/VBoxContainer/VictoryTitle
+@onready var subtitle: Label = $Control/CenterContainer/VBoxContainer/Subtitle
+@onready var press_enter_text: Label = $Control/CenterContainer/VBoxContainer/PressEnterText
+# Tween will be created dynamically
+@onready var blink_timer: Timer = $Control/BlinkTimer
+@onready var audio_player: AudioStreamPlayer = $Control/AudioStreamPlayer
 
-# Victory stats
-var elapsed_time: float = 0.0
-var total_score: int = 0
-var enemies_defeated: int = 0
+# Animation state
+var blink_visible: bool = true
+var can_proceed: bool = true
 
 func _ready() -> void:
-	# Connect button signals
-	next_level_button.pressed.connect(_on_next_level_pressed)
-	retry_button.pressed.connect(_on_retry_pressed)
-	menu_button.pressed.connect(_on_menu_pressed)
+	print("=== Victory Screen Ready ===")
+	print("victory_title: ", victory_title)
+	print("subtitle: ", subtitle)
+	print("press_enter_text: ", press_enter_text)
+	print("blink_timer: ", blink_timer)
 	
-	# Apply button styling
-	_setup_button_styles()
+	# Start animations
+	_start_victory_pulse_animation()
+	_start_blink_animation()
 	
-	# Play victory fanfare if available
+	# Play victory sound if available
 	_play_victory_sound()
+
+func _start_victory_pulse_animation() -> void:
+	"""Start the victory title pulsing animation (like victoryPulse in HTML)"""
+	if victory_title:
+		var tween = create_tween()
+		tween.set_loops()  # Infinite loop
+		tween.set_trans(Tween.TRANS_SINE)
+		tween.set_ease(Tween.EASE_IN_OUT)
+		
+		# Pulse scale and brightness
+		tween.tween_method(_update_victory_pulse, 0.0, 1.0, 1.0)
+		tween.tween_method(_update_victory_pulse, 1.0, 0.0, 1.0)
+
+func _update_victory_pulse(progress: float) -> void:
+	"""Update victory title pulse effect"""
+	if victory_title:
+		# Scale from 1.0 to 1.1
+		var scale_value = 1.0 + (progress * 0.1)
+		victory_title.scale = Vector2(scale_value, scale_value)
+		
+		# Brightness from 1.0 to 1.2
+		var brightness = 1.0 + (progress * 0.2)
+		victory_title.modulate = Color(brightness, brightness, brightness, 1.0)
+
+func _start_blink_animation() -> void:
+	"""Start the press enter text blinking animation"""
+	if blink_timer:
+		blink_timer.timeout.connect(_on_blink_timer_timeout)
+
+func _on_blink_timer_timeout() -> void:
+	"""Handle blink timer timeout - toggle press enter text visibility"""
+	if press_enter_text:
+		blink_visible = !blink_visible
+		
+		# Animate opacity change
+		var tween = create_tween()
+		tween.set_trans(Tween.TRANS_SINE)
+		tween.set_ease(Tween.EASE_IN_OUT)
+		
+		var target_alpha = 1.0 if blink_visible else 0.3
+		tween.tween_property(press_enter_text, "modulate:a", target_alpha, 0.4)
+
+func _process(_delta: float) -> void:
+	"""Handle input for proceeding to next level"""
+	if Input.is_action_just_pressed("ui_accept") and can_proceed:
+		print("UI_ACCEPT detected in victory screen!")
+		_proceed_to_next_level()
 	
-	# Update stats display
-	_update_stats_display()
+	# Also check for ENTER key directly as fallback
+	if Input.is_physical_key_pressed(KEY_ENTER) and can_proceed:
+		print("ENTER key detected directly in victory screen!")
+		can_proceed = false  # Prevent multiple triggers
+		_proceed_to_next_level()
+
+func _proceed_to_next_level() -> void:
+	"""Handle proceeding to next level"""
+	can_proceed = false
 	
-	# Setup input handling for ESC key
-	get_tree().root.gui_focus_changed.connect(_on_focus_changed)
-
-
-func _setup_button_styles() -> void:
-	"""Setup button hover and press effects"""
-	var buttons: Array[Button] = [next_level_button, retry_button, menu_button]
+	print("ENTER pressed - requesting next level transition")
 	
-	for btn in buttons:
-		btn.mouse_entered.connect(_on_button_hover.bindv([btn]))
-		btn.mouse_exited.connect(_on_button_unhover.bindv([btn]))
-		btn.pressed.connect(_on_button_pressed.bindv([btn]))
+	# Stop animations
+	if blink_timer:
+		blink_timer.stop()
+	
+	# Play click sound
+	_play_click_sound()
+	
+	# Fade out animation
+	await _play_exit_animation()
+	
+	# Emit signal to let the scene handle the transition
+	print("Emitting proceed_to_next_level_requested signal")
+	proceed_to_next_level_requested.emit()
 
-
-func _on_button_hover(btn: Button) -> void:
-	"""Handle button hover state"""
+func _play_exit_animation() -> void:
+	"""Play exit animation before transitioning"""
 	var tween = create_tween()
-	tween.set_trans(Tween.TRANS_SINE)
-	tween.set_ease(Tween.EASE_OUT)
-	tween.tween_property(btn, "scale", Vector2(1.1, 1.1), 0.15)
-
-
-func _on_button_unhover(btn: Button) -> void:
-	"""Handle button unhover state"""
-	var tween = create_tween()
-	tween.set_trans(Tween.TRANS_SINE)
-	tween.set_ease(Tween.EASE_OUT)
-	tween.tween_property(btn, "scale", Vector2(1.0, 1.0), 0.15)
-
-
-func _on_button_pressed(btn: Button) -> void:
-	"""Handle button press state"""
-	var tween = create_tween()
+	tween.set_parallel(true)
 	tween.set_trans(Tween.TRANS_SINE)
 	tween.set_ease(Tween.EASE_IN)
-	tween.tween_property(btn, "scale", Vector2(0.95, 0.95), 0.1)
-
+	
+	# Fade out all elements
+	if victory_title:
+		tween.tween_property(victory_title, "modulate:a", 0.0, 0.5)
+	if subtitle:
+		tween.tween_property(subtitle, "modulate:a", 0.0, 0.5)
+	if press_enter_text:
+		tween.tween_property(press_enter_text, "modulate:a", 0.0, 0.5)
+	
+	await tween.finished
 
 func _play_victory_sound() -> void:
 	"""Play victory fanfare sound"""
-	
+	# TODO: Add victory sound if available
+	pass
 
+func _play_click_sound() -> void:
+	"""Play UI click sound effect"""
+	# TODO: Add click sound if available
+	pass
 
-func _update_stats_display() -> void:
-	"""Update the stats labels with current values"""
-	var time_label: Label = $CenterContainer/VBoxContainer/StatsPanel/MarginContainer/StatsVBox/TimeStat/TimeValue
-	var score_label: Label = $CenterContainer/VBoxContainer/StatsPanel/MarginContainer/StatsVBox/ScoreStat/ScoreValue
-	var enemies_label: Label = $CenterContainer/VBoxContainer/StatsPanel/MarginContainer/StatsVBox/EnemiesStat/EnemiesValue
-	
-	# Format time (elapsed_time is in seconds)
-	var minutes: int = int(elapsed_time / 60.0)
-	var seconds: int = int(elapsed_time) % 60
-	time_label.text = "%dm %ds" % [minutes, seconds]
-	
-	# Format score with commas
-	score_label.text = _format_number(total_score)
-	
-	# Display enemies defeated
-	enemies_label.text = str(enemies_defeated)
-
-
-func _format_number(num: int) -> String:
-	"""Format number with thousand separators"""
-	var str_num = str(num)
-	var formatted = ""
-	var count = 0
-	
-	for i in range(str_num.length() - 1, -1, -1):
-		if count > 0 and count % 3 == 0:
-			formatted = "," + formatted
-		formatted = str_num[i] + formatted
-		count += 1
-	
-	return formatted
-
-
-func _on_focus_changed(_control: Control) -> void:
-	"""Handle ESC key press"""
-	if Input.is_action_just_pressed("ui_cancel"):
-		_on_menu_pressed()
-
-
-func _on_next_level_pressed() -> void:
-	"""Navigate to next level"""
-	await get_tree().create_timer(0.3).timeout
-	print("Next Level button pressed - Load next level")
-	LevelManager.go_to_next_level()
-
-func _on_retry_pressed() -> void:
-	"""Retry current level"""
-	await get_tree().create_timer(0.3).timeout
-	# TODO: Reload current level scene
-	print("Retry button pressed - Restart level")
-	LevelManager.restart_current_level()
-
-
-func _on_menu_pressed() -> void:
-	"""Return to main menu"""
-	await get_tree().create_timer(0.3).timeout
-	print("Menu button pressed - Return to title")
-	LevelManager.go_to_title()
-
-
-## Public method to set victory stats from game level
+## Public method to set victory stats (simplified for HTML-style design)
 func set_victory_stats(time: float, score: int, enemies: int) -> void:
 	"""
-	Set the victory stats to display
+	Set the victory stats (not displayed in this simple design)
 	
 	Args:
 		time: Elapsed time in seconds
-		score: Total score achieved
+		score: Total score achieved  
 		enemies: Number of enemies defeated
 	"""
-	elapsed_time = time
-	total_score = score
-	enemies_defeated = enemies
-	
-	if is_node_ready():
-		_update_stats_display()
+	# Stats not displayed in this simple HTML-inspired design
+	print("Victory stats - Time: %s, Score: %d, Enemies: %d" % [time, score, enemies])

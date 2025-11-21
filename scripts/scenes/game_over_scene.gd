@@ -1,140 +1,137 @@
-extends Control
+extends CanvasLayer
 
-## Game Over Scene Script
-## Displays game failure screen with attempt statistics and navigation options
+## Game Over Scene Script - HTML-inspired design
+## Displays game over screen with danger blink and restart functionality
 
-@onready var retry_button: Button = $CenterContainer/VBoxContainer/ButtonHBox/RetryButton
-@onready var menu_button: Button = $CenterContainer/VBoxContainer/ButtonHBox/MenuButton
-@onready var audio_player: AudioStreamPlayer = $AudioStreamPlayer
+@onready var game_over_title: Label = $Control/CenterContainer/VBoxContainer/GameOverTitle
+@onready var failure_text: Label = $Control/CenterContainer/VBoxContainer/FailureText
+@onready var press_enter_text: Label = $Control/CenterContainer/VBoxContainer/PressEnterText
+@onready var blink_timer: Timer = $Control/BlinkTimer
+@onready var danger_blink_timer: Timer = $Control/DangerBlinkTimer
+@onready var audio_player: AudioStreamPlayer = $Control/AudioStreamPlayer
 
-# Game over stats
-var level_number: int = 1
-var time_survived: float = 0.0
-var score_before_defeat: int = 0
+# Animation state
+var blink_visible: bool = true
+var danger_bright: bool = false
+var can_restart: bool = true
 
 func _ready() -> void:
-	# Connect button signals
-	retry_button.pressed.connect(_on_retry_pressed)
-	menu_button.pressed.connect(_on_menu_pressed)
+	print("=== Game Over Screen Ready ===")
+	print("game_over_title: ", game_over_title)
+	print("failure_text: ", failure_text)
+	print("press_enter_text: ", press_enter_text)
 	
-	# Apply button styling
-	_setup_button_styles()
+	# Start animations
+	_start_danger_blink_animation()
+	_start_blink_animation()
 	
 	# Play game over sound if available
-	_play_gameover_sound()
+	_play_game_over_sound()
+
+func _start_danger_blink_animation() -> void:
+	"""Start the game over title danger blinking animation (like dangerBlink in HTML)"""
+	if danger_blink_timer:
+		danger_blink_timer.timeout.connect(_on_danger_blink_timer_timeout)
+
+func _on_danger_blink_timer_timeout() -> void:
+	"""Handle danger blink timer timeout - toggle game over title brightness and opacity"""
+	if game_over_title:
+		danger_bright = !danger_bright
+		
+		# Animate opacity and brightness change
+		var tween = create_tween()
+		tween.set_trans(Tween.TRANS_SINE)
+		tween.set_ease(Tween.EASE_IN_OUT)
+		
+		if danger_bright:
+			# Bright state: opacity 1.0, brightness 1.2
+			tween.tween_method(_update_danger_effect, 0.0, 1.0, 0.25)
+		else:
+			# Dim state: opacity 0.5, brightness 1.0
+			tween.tween_method(_update_danger_effect, 1.0, 0.0, 0.25)
+
+func _update_danger_effect(progress: float) -> void:
+	"""Update danger blink effect on game over title"""
+	if game_over_title:
+		# Opacity from 0.5 to 1.0
+		var opacity = 0.5 + (progress * 0.5)
+		
+		# Brightness from 1.0 to 1.2
+		var brightness = 1.0 + (progress * 0.2)
+		
+		game_over_title.modulate = Color(brightness, brightness, brightness, opacity)
+
+func _start_blink_animation() -> void:
+	"""Start the press enter text blinking animation"""
+	if blink_timer:
+		blink_timer.timeout.connect(_on_blink_timer_timeout)
+
+func _on_blink_timer_timeout() -> void:
+	"""Handle blink timer timeout - toggle press enter text visibility"""
+	if press_enter_text:
+		blink_visible = !blink_visible
+		
+		# Animate opacity change
+		var tween = create_tween()
+		tween.set_trans(Tween.TRANS_SINE)
+		tween.set_ease(Tween.EASE_IN_OUT)
+		
+		var target_alpha = 1.0 if blink_visible else 0.3
+		tween.tween_property(press_enter_text, "modulate:a", target_alpha, 0.4)
+
+func _process(_delta: float) -> void:
+	"""Handle input for restarting game"""
+	if Input.is_action_just_pressed("ui_accept") and can_restart:
+		_restart_game()
+
+func _restart_game() -> void:
+	"""Handle game restart"""
+	can_restart = false
 	
-	# Update stats display
-	_update_stats_display()
+	print("ENTER pressed - restarting game")
 	
-	# Setup input handling for ESC key
-	get_tree().root.gui_focus_changed.connect(_on_focus_changed)
-
-
-func _setup_button_styles() -> void:
-	"""Setup button hover and press effects"""
-	var buttons: Array[Button] = [retry_button, menu_button]
+	# Stop animations
+	if blink_timer:
+		blink_timer.stop()
+	if danger_blink_timer:
+		danger_blink_timer.stop()
 	
-	for btn in buttons:
-		btn.mouse_entered.connect(_on_button_hover.bindv([btn]))
-		btn.mouse_exited.connect(_on_button_unhover.bindv([btn]))
-		btn.pressed.connect(_on_button_pressed.bindv([btn]))
-
-
-func _on_button_hover(btn: Button) -> void:
-	"""Handle button hover state"""
-	var tween = create_tween()
-	tween.set_trans(Tween.TRANS_SINE)
-	tween.set_ease(Tween.EASE_OUT)
-	tween.tween_property(btn, "scale", Vector2(1.1, 1.1), 0.15)
-
-
-func _on_button_unhover(btn: Button) -> void:
-	"""Handle button unhover state"""
-	var tween = create_tween()
-	tween.set_trans(Tween.TRANS_SINE)
-	tween.set_ease(Tween.EASE_OUT)
-	tween.tween_property(btn, "scale", Vector2(1.0, 1.0), 0.15)
-
-
-func _on_button_pressed(btn: Button) -> void:
-	"""Handle button press state"""
-	var tween = create_tween()
-	tween.set_trans(Tween.TRANS_SINE)
-	tween.set_ease(Tween.EASE_IN)
-	tween.tween_property(btn, "scale", Vector2(0.95, 0.95), 0.1)
-
-
-func _play_gameover_sound() -> void:
-	"""Play game over sound effect"""
+	# Play click sound
+	_play_click_sound()
 	
-
-
-func _update_stats_display() -> void:
-	"""Update the stats labels with current values"""
-	var level_label: Label = $CenterContainer/VBoxContainer/StatsPanel/MarginContainer/StatsVBox/LevelStat/LevelValue
-	var time_label: Label = $CenterContainer/VBoxContainer/StatsPanel/MarginContainer/StatsVBox/TimeStat/TimeValue
-	var score_label: Label = $CenterContainer/VBoxContainer/StatsPanel/MarginContainer/StatsVBox/ScoreStat/ScoreValue
+	# Fade out animation
+	await _play_exit_animation()
 	
-	# Display level number
-	level_label.text = str(level_number)
+	# Unpause game first
+	get_tree().paused = false
 	
-	# Format time (time_survived is in seconds)
-	var minutes: int = int(time_survived / 60.0)
-	var seconds: int = int(time_survived) % 60
-	time_label.text = "%dm %ds" % [minutes, seconds]
-	
-	# Format score with commas
-	score_label.text = _format_number(score_before_defeat)
-
-
-func _format_number(num: int) -> String:
-	"""Format number with thousand separators"""
-	var str_num = str(num)
-	var formatted = ""
-	var count = 0
-	
-	for i in range(str_num.length() - 1, -1, -1):
-		if count > 0 and count % 3 == 0:
-			formatted = "," + formatted
-		formatted = str_num[i] + formatted
-		count += 1
-	
-	return formatted
-
-
-func _on_focus_changed(_control: Control) -> void:
-	"""Handle ESC key press"""
-	if Input.is_action_just_pressed("ui_cancel"):
-		_on_menu_pressed()
-
-
-func _on_retry_pressed() -> void:
-	"""Retry the current level"""
-	await get_tree().create_timer(0.3).timeout
-	print("Retry button pressed - Restart level %d" % level_number)
+	# Restart current level directly (no need to queue_free since we're changing scenes)
+	print("Restarting current level...")
 	LevelManager.restart_current_level()
 
-
-func _on_menu_pressed() -> void:
-	"""Return to main menu"""
-	await get_tree().create_timer(0.3).timeout
-	print("Menu button pressed - Return to title")
-	LevelManager.go_to_title()
-
-
-## Public method to set game over stats from game level
-func set_gameover_stats(level: int, time_survived_seconds: float, score: int) -> void:
-	"""
-	Set the game over stats to display
+func _play_exit_animation() -> void:
+	"""Play exit animation before restarting"""
+	var tween = create_tween()
+	tween.set_parallel(true)
+	tween.set_trans(Tween.TRANS_SINE)
+	tween.set_ease(Tween.EASE_IN)
 	
-	Args:
-		level: Current level number
-		time_survived_seconds: Time survived in seconds
-		score: Score earned before defeat
-	"""
-	level_number = level
-	time_survived = time_survived_seconds
-	score_before_defeat = score
+	# Fade out all elements
+	if game_over_title:
+		tween.tween_property(game_over_title, "modulate:a", 0.0, 0.5)
+	if failure_text:
+		tween.tween_property(failure_text, "modulate:a", 0.0, 0.5)
+	if press_enter_text:
+		tween.tween_property(press_enter_text, "modulate:a", 0.0, 0.5)
 	
-	if is_node_ready():
-		_update_stats_display()
+	await tween.finished
+
+func _play_game_over_sound() -> void:
+	"""Play game over sound"""
+	# TODO: Add game over sound if available
+	pass
+
+func _play_click_sound() -> void:
+	"""Play UI click sound effect"""
+	# TODO: Add click sound if available
+	pass
