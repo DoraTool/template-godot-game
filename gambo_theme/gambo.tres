@@ -1,25 +1,25 @@
 [gd_resource type="Theme" script_class="GamboTheme" load_steps=48 format=3 uid="uid://btaojad5x07kh"]
 
-[ext_resource type="Script" uid="uid://c0lc8f7hhg0pd" path="res://gambo_theme/styles/style_box_3d_container_slot.gd" id="1_7bd8y"]
-[ext_resource type="Script" uid="uid://dkr8vrlkkkj0v" path="res://gambo_theme/styles/style_box_pixel_container_clickable.gd" id="1_ddtrp"]
-[ext_resource type="FontFile" uid="uid://5itffadvgojq" path="res://gambo_theme/fonts/retro-pixel-arcade.otf.woff2" id="1_tob56"]
-[ext_resource type="Texture2D" uid="uid://524y2i0nnx8a" path="res://gambo_theme/ui/3d_style/container_3d_slot.png" id="2_8k24d"]
-[ext_resource type="Texture2D" uid="uid://b1qjy2mxr3c6p" path="res://gambo_theme/ui/3d_style/container_3d_clickable.png" id="2_xkd6p"]
-[ext_resource type="Texture2D" uid="uid://bphfkdni27kl4" path="res://gambo_theme/ui/pixel_style/container_pixel_clickable.png" id="2_y3vgn"]
-[ext_resource type="FontFile" uid="uid://bpu4ewcnyw1qt" path="res://gambo_theme/fonts/supercell-magic_0.ttf" id="4_1u482"]
-[ext_resource type="Script" uid="uid://31yg2jqhd5bl" path="res://gambo_theme/gambo.gd" id="4_7bd8y"]
-[ext_resource type="Script" uid="uid://dt2m2he3hplbu" path="res://gambo_theme/styles/style_box_pixel_container.gd" id="7_k2n3a"]
-[ext_resource type="Texture2D" uid="uid://buv3vru6h0ccl" path="res://gambo_theme/ui/pixel_style/container_pixel.png" id="8_tob56"]
-[ext_resource type="Script" uid="uid://bjhr3gw7fytio" path="res://gambo_theme/styles/style_box_3d_container.gd" id="9_1u482"]
-[ext_resource type="Texture2D" uid="uid://b7gk51w80fyfe" path="res://gambo_theme/ui/3d_style/container_3d.png" id="10_p0kcp"]
-[ext_resource type="Script" uid="uid://dx7jp2b0qqb46" path="res://gambo_theme/styles/style_box_pixel_container_slot.gd" id="11_gfvqu"]
-[ext_resource type="Texture2D" uid="uid://cq53paosfpq48" path="res://gambo_theme/ui/pixel_style/container_pixel_slot.png" id="12_scecn"]
-[ext_resource type="Script" uid="uid://dp1q0tk1fdhpl" path="res://gambo_theme/styles/style_box_pixel_container_progress.gd" id="13_i22m1"]
-[ext_resource type="Texture2D" uid="uid://cj4it052lurcj" path="res://gambo_theme/ui/pixel_style/container_pixel_progress_fill.png" id="14_57jho"]
-[ext_resource type="Script" uid="uid://qiqvef2y0mtl" path="res://gambo_theme/styles/style_box_3d_container_progress.gd" id="15_qu0bj"]
-[ext_resource type="Texture2D" uid="uid://dc8q6xciow087" path="res://gambo_theme/ui/3d_style/container_3d_progress_fill.png" id="16_rijmj"]
-[ext_resource type="FontFile" uid="uid://cwyiixto2xgl5" path="res://gambo_theme/fonts/supercell-magic_0.ttf" id="17_p0kcp"]
-[ext_resource type="Script" uid="uid://citf4ypykdcru" path="res://gambo_theme/styles/style_box_3d_container_clickable.gd" id="1002"]
+[ext_resource type="Script" path="res://gambo_theme/styles/style_box_3d_container_slot.gd" id="1_7bd8y"]
+[ext_resource type="Script" path="res://gambo_theme/styles/style_box_pixel_container_clickable.gd" id="1_ddtrp"]
+[ext_resource type="FontFile" path="res://gambo_theme/fonts/retro-pixel-arcade.otf.woff2" id="1_tob56"]
+[ext_resource type="Texture2D" path="res://gambo_theme/ui/3d_style/container_3d_slot.png" id="2_8k24d"]
+[ext_resource type="Texture2D" path="res://gambo_theme/ui/3d_style/container_3d_clickable.png" id="2_xkd6p"]
+[ext_resource type="Texture2D" path="res://gambo_theme/ui/pixel_style/container_pixel_clickable.png" id="2_y3vgn"]
+[ext_resource type="FontFile" path="res://gambo_theme/fonts/supercell-magic_0.ttf" id="4_1u482"]
+[ext_resource type="Script" path="res://gambo_theme/gambo.gd" id="4_7bd8y"]
+[ext_resource type="Script" path="res://gambo_theme/styles/style_box_pixel_container.gd" id="7_k2n3a"]
+[ext_resource type="Texture2D" path="res://gambo_theme/ui/pixel_style/container_pixel.png" id="8_tob56"]
+[ext_resource type="Script" path="res://gambo_theme/styles/style_box_3d_container.gd" id="9_1u482"]
+[ext_resource type="Texture2D" path="res://gambo_theme/ui/3d_style/container_3d.png" id="10_p0kcp"]
+[ext_resource type="Script" path="res://gambo_theme/styles/style_box_pixel_container_slot.gd" id="11_gfvqu"]
+[ext_resource type="Texture2D" path="res://gambo_theme/ui/pixel_style/container_pixel_slot.png" id="12_scecn"]
+[ext_resource type="Script" path="res://gambo_theme/styles/style_box_pixel_container_progress.gd" id="13_i22m1"]
+[ext_resource type="Texture2D" path="res://gambo_theme/ui/pixel_style/container_pixel_progress_fill.png" id="14_57jho"]
+[ext_resource type="Script" path="res://gambo_theme/styles/style_box_3d_container_progress.gd" id="15_qu0bj"]
+[ext_resource type="Texture2D" path="res://gambo_theme/ui/3d_style/container_3d_progress_fill.png" id="16_rijmj"]
+[ext_resource type="FontFile" path="res://gambo_theme/fonts/supercell-magic_0.ttf" id="17_p0kcp"]
+[ext_resource type="Script" path="res://gambo_theme/styles/style_box_3d_container_clickable.gd" id="1002"]
 
 [sub_resource type="StyleBox" id="StyleBox_1u482"]
 resource_local_to_scene = false
@@ -33,7 +33,7 @@ background_color = Color(0.36, 0.06, 0.6, 1)
 corner_radius = 9
 pixel_corner_style = true
 texture = ExtResource("2_y3vgn")
-metadata/_custom_type_script = "uid://dkr8vrlkkkj0v"
+metadata/_custom_type_script = "res://gambo_theme/styles/style_box_pixel_container_clickable.gd"
 
 [sub_resource type="StyleBox" id="StyleBox_i22m1"]
 resource_local_to_scene = false
@@ -47,7 +47,7 @@ background_color = Color(0.8, 0.3, 1, 1)
 corner_radius = 9
 pixel_corner_style = true
 texture = ExtResource("2_y3vgn")
-metadata/_custom_type_script = "uid://dkr8vrlkkkj0v"
+metadata/_custom_type_script = "res://gambo_theme/styles/style_box_pixel_container_clickable.gd"
 
 [sub_resource type="StyleBox" id="StyleBox_tob56"]
 resource_local_to_scene = false
@@ -61,7 +61,7 @@ background_color = Color(0.8, 0.3, 1, 1)
 corner_radius = 9
 pixel_corner_style = true
 texture = ExtResource("2_y3vgn")
-metadata/_custom_type_script = "uid://dkr8vrlkkkj0v"
+metadata/_custom_type_script = "res://gambo_theme/styles/style_box_pixel_container_clickable.gd"
 
 [sub_resource type="StyleBox" id="StyleBox_0olcf"]
 resource_local_to_scene = false
@@ -74,7 +74,7 @@ script = ExtResource("1_ddtrp")
 corner_radius = 9
 pixel_corner_style = true
 texture = ExtResource("2_y3vgn")
-metadata/_custom_type_script = "uid://dkr8vrlkkkj0v"
+metadata/_custom_type_script = "res://gambo_theme/styles/style_box_pixel_container_clickable.gd"
 
 [sub_resource type="StyleBox" id="StyleBox_k2n3a"]
 resource_local_to_scene = false
@@ -88,7 +88,7 @@ background_color = Color(0.5, 0.08, 0.85, 1)
 corner_radius = 9
 pixel_corner_style = true
 texture = ExtResource("2_y3vgn")
-metadata/_custom_type_script = "uid://dkr8vrlkkkj0v"
+metadata/_custom_type_script = "res://gambo_theme/styles/style_box_pixel_container_clickable.gd"
 
 [sub_resource type="StyleBox" id="StyleBox_p0kcp"]
 resource_local_to_scene = false
@@ -101,7 +101,7 @@ script = ExtResource("1002")
 background_color = Color(0.36, 0.06, 0.6, 1)
 texture = ExtResource("2_xkd6p")
 patch_scale = 0.33
-metadata/_custom_type_script = "uid://citf4ypykdcru"
+metadata/_custom_type_script = "res://gambo_theme/styles/style_box_3d_container_clickable.gd"
 
 [sub_resource type="StyleBox" id="StyleBox_57jho"]
 resource_local_to_scene = false
@@ -114,7 +114,7 @@ script = ExtResource("1002")
 background_color = Color(0.8, 0.3, 1, 1)
 texture = ExtResource("2_xkd6p")
 patch_scale = 0.33
-metadata/_custom_type_script = "uid://citf4ypykdcru"
+metadata/_custom_type_script = "res://gambo_theme/styles/style_box_3d_container_clickable.gd"
 
 [sub_resource type="StyleBox" id="StyleBox_gfvqu"]
 resource_local_to_scene = false
@@ -127,7 +127,7 @@ script = ExtResource("1002")
 background_color = Color(0.8, 0.3, 1, 1)
 texture = ExtResource("2_xkd6p")
 patch_scale = 0.33
-metadata/_custom_type_script = "uid://citf4ypykdcru"
+metadata/_custom_type_script = "res://gambo_theme/styles/style_box_3d_container_clickable.gd"
 
 [sub_resource type="StyleBox" id="StyleBox_41qt7"]
 resource_local_to_scene = false
@@ -139,7 +139,7 @@ content_margin_bottom = 6.0
 script = ExtResource("1002")
 texture = ExtResource("2_xkd6p")
 patch_scale = 0.33
-metadata/_custom_type_script = "uid://citf4ypykdcru"
+metadata/_custom_type_script = "res://gambo_theme/styles/style_box_3d_container_clickable.gd"
 
 [sub_resource type="StyleBox" id="StyleBox_scecn"]
 resource_local_to_scene = false
@@ -152,7 +152,7 @@ script = ExtResource("1002")
 background_color = Color(0.5, 0.08, 0.85, 1)
 texture = ExtResource("2_xkd6p")
 patch_scale = 0.33
-metadata/_custom_type_script = "uid://citf4ypykdcru"
+metadata/_custom_type_script = "res://gambo_theme/styles/style_box_3d_container_clickable.gd"
 
 [sub_resource type="StyleBox" id="StyleBox_wyp5b"]
 resource_local_to_scene = false
@@ -165,7 +165,7 @@ script = ExtResource("1_7bd8y")
 background_color = Color(0.2, 0.2, 0.3, 1)
 texture = ExtResource("2_8k24d")
 patch_scale = 0.33
-metadata/_custom_type_script = "uid://c0lc8f7hhg0pd"
+metadata/_custom_type_script = "res://gambo_theme/styles/style_box_3d_container_slot.gd"
 
 [sub_resource type="StyleBox" id="StyleBox_qu0bj"]
 resource_local_to_scene = false
@@ -178,7 +178,7 @@ script = ExtResource("1_7bd8y")
 background_color = Color(0.2, 0.2, 0.3, 1)
 texture = ExtResource("2_8k24d")
 patch_scale = 0.33
-metadata/_custom_type_script = "uid://c0lc8f7hhg0pd"
+metadata/_custom_type_script = "res://gambo_theme/styles/style_box_3d_container_slot.gd"
 
 [sub_resource type="StyleBox" id="StyleBox_wnhwl"]
 resource_local_to_scene = false
@@ -191,7 +191,7 @@ script = ExtResource("1_7bd8y")
 background_color = Color(0.2, 0.2, 0.3, 1)
 texture = ExtResource("2_8k24d")
 patch_scale = 0.33
-metadata/_custom_type_script = "uid://c0lc8f7hhg0pd"
+metadata/_custom_type_script = "res://gambo_theme/styles/style_box_3d_container_slot.gd"
 
 [sub_resource type="StyleBox" id="StyleBox_0stj3"]
 resource_local_to_scene = false
@@ -204,7 +204,7 @@ script = ExtResource("1_7bd8y")
 background_color = Color(0.2, 0.2, 0.3, 1)
 texture = ExtResource("2_8k24d")
 patch_scale = 0.33
-metadata/_custom_type_script = "uid://c0lc8f7hhg0pd"
+metadata/_custom_type_script = "res://gambo_theme/styles/style_box_3d_container_slot.gd"
 
 [sub_resource type="StyleBox" id="StyleBox_r0v88"]
 resource_local_to_scene = false
@@ -217,7 +217,7 @@ script = ExtResource("1_7bd8y")
 background_color = Color(0.2, 0.2, 0.3, 1)
 texture = ExtResource("2_8k24d")
 patch_scale = 0.33
-metadata/_custom_type_script = "uid://c0lc8f7hhg0pd"
+metadata/_custom_type_script = "res://gambo_theme/styles/style_box_3d_container_slot.gd"
 
 [sub_resource type="StyleBox" id="StyleBox_x2bh7"]
 resource_local_to_scene = false
@@ -231,7 +231,7 @@ background_color = Color(0.2, 0.2, 0.3, 1)
 corner_radius = 9
 pixel_corner_style = true
 texture = ExtResource("12_scecn")
-metadata/_custom_type_script = "uid://dx7jp2b0qqb46"
+metadata/_custom_type_script = "res://gambo_theme/styles/style_box_pixel_container_slot.gd"
 
 [sub_resource type="StyleBox" id="StyleBox_rijmj"]
 resource_local_to_scene = false
@@ -245,7 +245,7 @@ background_color = Color(0.2, 0.2, 0.3, 1)
 corner_radius = 9
 pixel_corner_style = true
 texture = ExtResource("12_scecn")
-metadata/_custom_type_script = "uid://dx7jp2b0qqb46"
+metadata/_custom_type_script = "res://gambo_theme/styles/style_box_pixel_container_slot.gd"
 
 [sub_resource type="StyleBox" id="StyleBox_002iq"]
 resource_local_to_scene = false
@@ -259,7 +259,7 @@ background_color = Color(0.2, 0.2, 0.3, 1)
 corner_radius = 9
 pixel_corner_style = true
 texture = ExtResource("12_scecn")
-metadata/_custom_type_script = "uid://dx7jp2b0qqb46"
+metadata/_custom_type_script = "res://gambo_theme/styles/style_box_pixel_container_slot.gd"
 
 [sub_resource type="StyleBox" id="StyleBox_ddtrp"]
 resource_local_to_scene = false
@@ -273,7 +273,7 @@ background_color = Color(0.2, 0.2, 0.3, 1)
 corner_radius = 9
 pixel_corner_style = true
 texture = ExtResource("12_scecn")
-metadata/_custom_type_script = "uid://dx7jp2b0qqb46"
+metadata/_custom_type_script = "res://gambo_theme/styles/style_box_pixel_container_slot.gd"
 
 [sub_resource type="StyleBox" id="StyleBox_sob1u"]
 resource_local_to_scene = false
@@ -287,7 +287,7 @@ background_color = Color(0.2, 0.2, 0.3, 1)
 corner_radius = 9
 pixel_corner_style = true
 texture = ExtResource("12_scecn")
-metadata/_custom_type_script = "uid://dx7jp2b0qqb46"
+metadata/_custom_type_script = "res://gambo_theme/styles/style_box_pixel_container_slot.gd"
 
 [sub_resource type="StyleBox" id="StyleBox_8dyrf"]
 resource_local_to_scene = false
@@ -301,7 +301,7 @@ background_color = Color(0.2, 0.2, 0.3, 1)
 corner_radius = 12
 pixel_corner_style = true
 texture = ExtResource("8_tob56")
-metadata/_custom_type_script = "uid://dt2m2he3hplbu"
+metadata/_custom_type_script = "res://gambo_theme/styles/style_box_pixel_container.gd"
 
 [sub_resource type="StyleBox" id="StyleBox_2e786"]
 resource_local_to_scene = false
@@ -315,7 +315,7 @@ background_color = Color(0.2, 0.2, 0.3, 1)
 corner_radius = 12
 texture = ExtResource("10_p0kcp")
 patch_scale = 0.33
-metadata/_custom_type_script = "uid://bjhr3gw7fytio"
+metadata/_custom_type_script = "res://gambo_theme/styles/style_box_3d_container.gd"
 
 [sub_resource type="StyleBox" id="StyleBox_imc5c"]
 resource_local_to_scene = false
@@ -329,7 +329,7 @@ background_color = Color(0.2, 0.2, 0.3, 1)
 corner_radius = 9
 pixel_corner_style = true
 texture = ExtResource("12_scecn")
-metadata/_custom_type_script = "uid://dx7jp2b0qqb46"
+metadata/_custom_type_script = "res://gambo_theme/styles/style_box_pixel_container_slot.gd"
 
 [sub_resource type="StyleBox" id="StyleBox_34a8v"]
 resource_local_to_scene = false
@@ -342,7 +342,7 @@ script = ExtResource("13_i22m1")
 corner_radius = 3
 pixel_corner_style = true
 texture = ExtResource("14_57jho")
-metadata/_custom_type_script = "uid://dp1q0tk1fdhpl"
+metadata/_custom_type_script = "res://gambo_theme/styles/style_box_pixel_container_progress.gd"
 
 [sub_resource type="StyleBox" id="StyleBox_17t2w"]
 resource_local_to_scene = false
@@ -355,7 +355,7 @@ script = ExtResource("1_7bd8y")
 background_color = Color(0.2, 0.2, 0.3, 1)
 texture = ExtResource("2_8k24d")
 patch_scale = 0.33
-metadata/_custom_type_script = "uid://c0lc8f7hhg0pd"
+metadata/_custom_type_script = "res://gambo_theme/styles/style_box_3d_container_slot.gd"
 
 [sub_resource type="StyleBox" id="StyleBox_ca6rf"]
 resource_local_to_scene = false
@@ -368,7 +368,7 @@ script = ExtResource("15_qu0bj")
 corner_radius = 12
 texture = ExtResource("16_rijmj")
 patch_scale = 0.33
-metadata/_custom_type_script = "uid://qiqvef2y0mtl"
+metadata/_custom_type_script = "res://gambo_theme/styles/style_box_3d_container_progress.gd"
 
 [sub_resource type="FontFile" id="9"]
 fallbacks = Array[Font]([ExtResource("1_tob56")])
