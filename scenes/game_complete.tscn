@@ -1,4 +1,4 @@
-[gd_scene load_steps=3 format=3 uid="uid://game_complete_scene"]
+[gd_scene load_steps=3 format=3]
 
 [ext_resource type="Script" path="res://scripts/scenes/game_complete_scene.gd" id="1_complete"]
 
