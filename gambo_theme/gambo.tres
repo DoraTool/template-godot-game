@@ -1,4 +1,4 @@
-[gd_resource type="Theme" script_class="GamboTheme" load_steps=48 format=3 uid="uid://btaojad5x07kh"]
+[gd_resource type="Theme" script_class="GamboTheme" load_steps=48 format=3]
 
 [ext_resource type="Script" path="res://gambo_theme/styles/style_box_3d_container_slot.gd" id="1_7bd8y"]
 [ext_resource type="Script" path="res://gambo_theme/styles/style_box_pixel_container_clickable.gd" id="1_ddtrp"]
