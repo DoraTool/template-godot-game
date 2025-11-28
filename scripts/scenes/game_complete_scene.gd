@@ -31,11 +31,6 @@ var rainbow_colors: Array[Color] = [
 var rainbow_index: int = 0
 
 func _ready() -> void:
-	print("=== Game Complete Screen Ready ===")
-	print("game_complete_title: ", game_complete_title)
-	print("congratulations_text: ", congratulations_text)
-	print("press_enter_text: ", press_enter_text)
-	
 	# Start animations
 	_start_glow_animation()
 	_start_blink_animation()
@@ -127,8 +122,6 @@ func _return_to_menu() -> void:
 	
 	# Unpause game first
 	get_tree().paused = false
-	
-	print("Returning to main menu...")
 	proceed_to_title_screen_requested.emit()
 
 func _play_exit_animation() -> void:

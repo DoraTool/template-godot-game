@@ -4,8 +4,6 @@ extends "res://gambo_theme/styles/style_box_base.gd"
 class_name StyleBox3DContainerSlot
 
 func _init() -> void:
-    print("StyleBox3DContainerSlot init")
-    
     patch_margin_left = 36
     patch_margin_top = 36
     patch_margin_right = 36

@@ -4,8 +4,6 @@ extends "res://gambo_theme/styles/style_box_base.gd"
 class_name StyleBoxPixelContainerProgress
 
 func _init() -> void:
-    print("StyleBoxPixelContainerProgress init")
-    
     patch_margin_left = 6
     patch_margin_top = 6
     patch_margin_right = 6

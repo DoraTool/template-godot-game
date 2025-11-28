@@ -49,8 +49,6 @@ func _init() -> void:
 	pass
 
 func _draw(to_canvas_item: RID, rect: Rect2) -> void:
-	# TODO
-	print("StyleBoxBase draw")
 	# Step 1: Draw rounded corner background layer
 	_draw_rounded_background(to_canvas_item, rect)
 	

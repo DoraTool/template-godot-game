@@ -42,7 +42,6 @@ func _process(_delta):
     if Engine.is_editor_hint():
         var _scale_ratio = scale / _last_calculated_base_scale
         if _scale_ratio != _last_scale_ratio:
-            print("Scale changed during game:", scale)
             custom_scale = _scale_ratio
             _last_scale_ratio = _scale_ratio
 
@@ -120,10 +119,6 @@ func calculate_scale():
     scale = final_scale_value
 
     _last_scale_ratio = scale / _last_calculated_base_scale
-    
-    # 在编辑器中也显示调试信息
-    if Engine.is_editor_hint():
-        print("Editor - Texture size: ", texture_size, " Max size: (", max_width, ", ", max_height, ") Base scale: ", base_scale, " Custom scale: ", custom_scale, " Final scale: ", final_scale_value)
     
 # 当纹理改变时重新计算缩放
 func _on_texture_changed():

@@ -15,12 +15,6 @@ var blink_visible: bool = true
 var can_proceed: bool = true
 
 func _ready() -> void:
-	print("=== Victory Screen Ready ===")
-	print("victory_title: ", victory_title)
-	print("subtitle: ", subtitle)
-	print("press_enter_text: ", press_enter_text)
-	print("blink_timer: ", blink_timer)
-	
 	# Start animations
 	_start_victory_pulse_animation()
 	_start_blink_animation()
@@ -72,20 +66,16 @@ func _on_blink_timer_timeout() -> void:
 func _process(_delta: float) -> void:
 	"""Handle input for proceeding to next level"""
 	if Input.is_action_just_pressed("ui_accept") and can_proceed:
-		print("UI_ACCEPT detected in victory screen!")
 		_proceed_to_next_level()
 	
 	# Also check for ENTER key directly as fallback
 	if Input.is_physical_key_pressed(KEY_ENTER) and can_proceed:
-		print("ENTER key detected directly in victory screen!")
 		can_proceed = false  # Prevent multiple triggers
 		_proceed_to_next_level()
 
 func _proceed_to_next_level() -> void:
 	"""Handle proceeding to next level"""
 	can_proceed = false
-	
-	print("ENTER pressed - requesting next level transition")
 	
 	# Stop animations
 	if blink_timer:
@@ -98,7 +88,6 @@ func _proceed_to_next_level() -> void:
 	await _play_exit_animation()
 	
 	# Emit signal to let the scene handle the transition
-	print("Emitting proceed_to_next_level_requested signal")
 	proceed_to_next_level_requested.emit()
 
 func _play_exit_animation() -> void:
@@ -127,16 +116,3 @@ func _play_click_sound() -> void:
 	"""Play UI click sound effect"""
 	# TODO: Add click sound if available
 	pass
-
-## Public method to set victory stats (simplified for HTML-style design)
-func set_victory_stats(time: float, score: int, enemies: int) -> void:
-	"""
-	Set the victory stats (not displayed in this simple design)
-	
-	Args:
-		time: Elapsed time in seconds
-		score: Total score achieved  
-		enemies: Number of enemies defeated
-	"""
-	# Stats not displayed in this simple HTML-inspired design
-	print("Victory stats - Time: %s, Score: %d, Enemies: %d" % [time, score, enemies])

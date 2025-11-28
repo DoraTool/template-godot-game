@@ -16,11 +16,6 @@ var danger_bright: bool = false
 var can_restart: bool = true
 
 func _ready() -> void:
-	print("=== Game Over Screen Ready ===")
-	print("game_over_title: ", game_over_title)
-	print("failure_text: ", failure_text)
-	print("press_enter_text: ", press_enter_text)
-	
 	# Start animations
 	_start_danger_blink_animation()
 	_start_blink_animation()
@@ -87,9 +82,6 @@ func _process(_delta: float) -> void:
 func _restart_game() -> void:
 	"""Handle game restart"""
 	can_restart = false
-	
-	print("ENTER pressed - restarting game")
-	
 	# Stop animations
 	if blink_timer:
 		blink_timer.stop()
@@ -105,8 +97,6 @@ func _restart_game() -> void:
 	# Unpause game first
 	get_tree().paused = false
 	
-	# Restart current level directly (no need to queue_free since we're changing scenes)
-	print("Restarting current level...")
 	LevelManager.restart_current_level()
 
 func _play_exit_animation() -> void:
