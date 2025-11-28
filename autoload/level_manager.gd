@@ -55,25 +55,19 @@ func start_game() -> void:
 
 ## Go to the next level
 func go_to_next_level() -> void:
-	print("go_to_next_level called, current_level_path: ", current_level_path)
 	var next_level = get_next_level_scene(current_level_path)
-	print("Next level determined: ", next_level)
 	if next_level != "":
 		current_level_path = next_level
-		print("Changing to next level: ", current_level_path)
 		get_tree().change_scene_to_file(current_level_path)
 	else:
 		# Game complete
-		print("All levels completed, going to game complete screen")
 		get_tree().change_scene_to_file("res://scenes/game_complete.tscn")
 
 ## Restart current level
 func restart_current_level() -> void:
-	print("Restarting level: ", current_level_path)
 	if current_level_path != "":
 		get_tree().change_scene_to_file(current_level_path)
 	else:
-		print("ERROR: current_level_path is empty, falling back to first level")
 		# Fallback to first level if current_level_path is empty
 		var first_level = get_first_level_scene()
 		if first_level != "":
@@ -88,11 +82,9 @@ func go_to_title() -> void:
 
 ## Handle player death
 func player_died() -> void:
-	print("Player died in level: ", current_level_path)
 	# Ensure current_level_path is set (fallback to first level if empty)
 	if current_level_path == "":
 		current_level_path = get_first_level_scene()
-		print("current_level_path was empty, set to: ", current_level_path)
 	get_tree().change_scene_to_file("res://scenes/game_over.tscn")
 
 func restart_game() -> void:

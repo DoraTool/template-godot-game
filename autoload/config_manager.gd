@@ -27,7 +27,6 @@ func load_config(path: String) -> void:
         return
 
     data = json.data
-    print("Config loaded:", path)
 
 
 # --------------------------
@@ -40,7 +39,6 @@ func save_config(path: String = "user://game_config.json") -> void:
         return
 
     file.store_string(JSON.stringify(data, "\t"))
-    print("Config saved:", path)
 
 
 # --------------------------
