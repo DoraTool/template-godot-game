@@ -28,6 +28,20 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
+[node name="BackgroundTexture" type="TextureRect" parent="CenterContainer"]
+layout_mode = 2
+expand_mode = 2
+stretch_mode = 5
+; TODO 设置纹理 等其他属性
+; texture = ExtResource("BackgroundTexture")
+
+[node name="GameTitle" type="TextureRect" parent="CenterContainer"]
+layout_mode = 2
+expand_mode = 2
+stretch_mode = 5
+; TODO 设置纹理 等其他属性
+; texture = ExtResource("GameTitle")
+
 [node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer"]
 layout_mode = 2
 theme_override_constants/separation = 30
@@ -36,15 +50,6 @@ alignment = 1
 [node name="Spacer1" type="Control" parent="CenterContainer/VBoxContainer"]
 custom_minimum_size = Vector2(0, 80)
 layout_mode = 2
-
-[node name="GameTitle" type="Label" parent="CenterContainer/VBoxContainer"]
-layout_mode = 2
-theme_override_colors/font_color = Color(1, 0.84, 0.2, 1)
-theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
-theme_override_constants/outline_size = 6
-theme_override_font_sizes/font_size = 72
-text = "GODOT GAME"
-horizontal_alignment = 1
 
 [node name="Spacer2" type="Control" parent="CenterContainer/VBoxContainer"]
 custom_minimum_size = Vector2(0, 20)
