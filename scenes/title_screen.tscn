@@ -20,6 +20,29 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(0.05, 0.08, 0.12, 1)
 
+
+[node name="BackgroundTexture" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+expand_mode = 1
+stretch_mode = 6
+; TODO 设置纹理 
+; texture = ExtResource("BackgroundTexture")
+
+
+[node name="GameTitle" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+expand_mode = 1
+stretch_mode = 6
+; TODO 设置纹理
+; texture = ExtResource("GameTitle")
+
+
 [node name="CenterContainer" type="CenterContainer" parent="."]
 layout_mode = 1
 anchors_preset = 15
@@ -28,19 +51,6 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="BackgroundTexture" type="TextureRect" parent="CenterContainer"]
-layout_mode = 2
-expand_mode = 2
-stretch_mode = 5
-; TODO 设置纹理 等其他属性
-; texture = ExtResource("BackgroundTexture")
-
-[node name="GameTitle" type="TextureRect" parent="CenterContainer"]
-layout_mode = 2
-expand_mode = 2
-stretch_mode = 5
-; TODO 设置纹理 等其他属性
-; texture = ExtResource("GameTitle")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer"]
 layout_mode = 2
