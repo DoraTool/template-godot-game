@@ -1,9 +1,9 @@
 extends Node
 
-# 存放所有配置数据
+# Store all configuration data
 var data: Dictionary = {}
 
-# 默认配置文件（你可以改）
+# Default config file (you can change this)
 const DEFAULT_CONFIG_PATH := "res://game_config.json"
 
 func _ready():
@@ -11,7 +11,7 @@ func _ready():
 
 
 # --------------------------
-# 加载配置 JSON
+# Load configuration JSON
 # --------------------------
 func load_config(path: String) -> void:
     var file := FileAccess.open(path, FileAccess.READ)
@@ -30,7 +30,7 @@ func load_config(path: String) -> void:
 
 
 # --------------------------
-# 保存配置到 user://
+# Save configuration to user://
 # --------------------------
 func save_config(path: String = "user://game_config.json") -> void:
     var file := FileAccess.open(path, FileAccess.WRITE)
@@ -42,7 +42,7 @@ func save_config(path: String = "user://game_config.json") -> void:
 
 
 # --------------------------
-# 获取配置：支持 “a.b.c” 路径
+# Get configuration: supports "a.b.c" path
 # --------------------------
 func get_value(path: String, default_value = null):
     var current = data
@@ -56,7 +56,7 @@ func get_value(path: String, default_value = null):
 
 
 # --------------------------
-# 设置配置：支持 “a.b.c” 路径
+# Set configuration: supports "a.b.c" path
 # --------------------------
 func set_value(path: String, value) -> void:
     var keys = path.split(".")

@@ -2,32 +2,32 @@
 class_name CustomSprite2D
 extends Sprite2D
 
-# CustomSprite2D 类 - 继承自 Sprite2D
-# 支持根据最大宽高自动计算缩放和在最大宽高基础上再进行自定义缩放
+# CustomSprite2D class - extends Sprite2D
+# Supports automatic scaling calculation based on max width/height and custom scaling on top of that
 
-# 导出属性，可在编辑器中设置（0 表示未设置）
+# Export properties that can be set in the editor (0 means not set)
 @export var max_width: float = 0.0 : set = set_max_width
 @export var max_height: float = 0.0 : set = set_max_height
 
-# 在 max_width 和 max_height 的基础上，再进行自定义缩放
+# Apply custom scaling on top of max_width and max_height
 @export var custom_scale: Vector2 = Vector2(1.0, 1.0) : set = set_custom_scale
 
-# 内部变量，用于跟踪内部计算缩放
+# Internal variable to track internally calculated scaling
 var _last_calculated_base_scale: Vector2 = Vector2(1.0, 1.0)
 
 var _last_scale_ratio: Vector2 = Vector2(1.0, 1.0)
 
 func _ready():
-    # 初始计算缩放
+    # Initial scale calculation
     calculate_scale()
     
-    # 在编辑器模式下，监听纹理变化
+    # In editor mode, listen for texture changes
     if Engine.is_editor_hint():
-        # 连接纹理变化信号（如果存在的话）
+        # Connect texture change signal (if it exists)
         if not texture_changed.is_connected(_on_texture_changed):
             texture_changed.connect(_on_texture_changed)
 
-# 获取属性列表，让 scale 属性可以被拦截
+# Get property list to allow scale property to be intercepted
 func _get_property_list():
     return [
         {
@@ -38,39 +38,39 @@ func _get_property_list():
     ]
 
 func _process(_delta):
-    # 每帧调用
+    # Called every frame
     if Engine.is_editor_hint():
         var _scale_ratio = scale / _last_calculated_base_scale
         if _scale_ratio != _last_scale_ratio:
             custom_scale = _scale_ratio
             _last_scale_ratio = _scale_ratio
 
-# 设置最大宽度
+# Set maximum width
 func set_max_width(value: float):
     max_width = value if value > 0 else 0.0
     calculate_scale()
     
-    # 在编辑器中通知属性变化
+    # Notify property changes in editor
     if Engine.is_editor_hint():
         notify_property_list_changed()
 
-# 设置最大高度
+# Set maximum height
 func set_max_height(value: float):
     max_height = value if value > 0 else 0.0
     calculate_scale()
     
-    # 在编辑器中通知属性变化
+    # Notify property changes in editor
     if Engine.is_editor_hint():
         notify_property_list_changed()
 
 func set_custom_scale(value: Vector2):
     custom_scale = value
     calculate_scale()
-    # 在编辑器中通知属性变化
+    # Notify property changes in editor
     if Engine.is_editor_hint():
         notify_property_list_changed()
 
-# 根据最大尺寸和图片尺寸计算缩放
+# Calculate scaling based on maximum dimensions and image size
 func calculate_scale():
     if not texture:
         return
@@ -82,44 +82,44 @@ func calculate_scale():
     var scale_x = 1.0
     var scale_y = 1.0
     
-    # 检查是否设置了最大宽度和高度（0 表示未设置）
+    # Check if max width and height are set (0 means not set)
     var has_max_width = max_width > 0
     var has_max_height = max_height > 0
     
-    # 计算各自的缩放比例
+    # Calculate respective scaling ratios
     if has_max_width:
         scale_x = max_width / texture_size.x
     
     if has_max_height:
         scale_y = max_height / texture_size.y
     
-    # 计算基础缩放（不包含 custom_scale）
+    # Calculate base scale (excluding custom_scale)
     var base_scale: Vector2
     if has_max_width and has_max_height:
-        # 都设置了：保证都满足，不要超出限制（取较小的缩放值）
+        # Both are set: ensure both are satisfied, don't exceed limits (take smaller scale value)
         var final_scale = min(scale_x, scale_y)
         base_scale = Vector2(final_scale, final_scale)
     elif has_max_width and not has_max_height:
-        # 只设置了最大宽度，保持比例
+        # Only max width is set, maintain aspect ratio
         base_scale = Vector2(scale_x, scale_x)
     elif not has_max_width and has_max_height:
-        # 只设置了最大高度，保持比例
+        # Only max height is set, maintain aspect ratio
         base_scale = Vector2(scale_y, scale_y)
     else:
-        # 都未设置（都为0），使用原始大小
+        # Neither is set (both are 0), use original size
         base_scale = Vector2(1.0, 1.0)
     
-    # 记录基础缩放，用于编辑器拖拽时的计算
+    # Record base scale for calculations during editor dragging
     _last_calculated_base_scale = base_scale
     
-    # 计算最终缩放（基础缩放 * 自定义缩放）
+    # Calculate final scale (base scale * custom scale)
     var final_scale_value = base_scale * custom_scale
     
-    # 直接设置属性
+    # Set property directly
     scale = final_scale_value
 
     _last_scale_ratio = scale / _last_calculated_base_scale
     
-# 当纹理改变时重新计算缩放
+# Recalculate scaling when texture changes
 func _on_texture_changed():
     calculate_scale()
