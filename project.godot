@@ -24,6 +24,10 @@ window/stretch/mode="canvas_items"
 window/stretch/aspect="keep"
 
 
+[gui]
+
+theme/custom="res://gambo_theme/gambo.tres"
+
 [autoload]
 Config="*res://autoload/config_manager.gd"
 LevelManager="*res://autoload/level_manager.gd"
