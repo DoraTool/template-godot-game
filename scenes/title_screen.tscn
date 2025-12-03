@@ -30,7 +30,7 @@ expand_mode = 1
 stretch_mode = 6
 grow_horizontal = 2
 grow_vertical = 2
-; TODO 设置纹理 
+; TODO Set texture 
 ; texture = ExtResource("BackgroundTexture")
 
 
@@ -43,7 +43,7 @@ expand_mode = 1
 stretch_mode = 5
 grow_horizontal = 2
 grow_vertical = 2
-; TODO 设置纹理
+; TODO Set texture
 ; texture = ExtResource("GameTitle")
 
 
