@@ -1,7 +1,6 @@
 extends Control
 ## Title Screen - Main menu for the game
 
-@onready var subtitle_label: Label = $CenterContainer/VBoxContainer/SubtitleLabel
 @onready var prompt_label: Label = $CenterContainer/VBoxContainer/PromptLabel
 @onready var blink_timer: Timer = $BlinkTimer
 
@@ -13,20 +12,6 @@ func _ready() -> void:
 	# Connect timer signal for blinking effect
 	blink_timer.timeout.connect(_on_blink_timer_timeout)
 	
-	# Add initial animation for title
-	_play_title_animation()
-
-
-func _play_title_animation() -> void:
-	"""Play entrance animation for title and subtitle"""
-	# Fade in subtitle with delay
-	await get_tree().create_timer(0.2).timeout
-	subtitle_label.modulate.a = 0.0
-	var subtitle_tween = create_tween()
-	subtitle_tween.set_trans(Tween.TRANS_SINE)
-	subtitle_tween.set_ease(Tween.EASE_OUT)
-	subtitle_tween.tween_property(subtitle_label, "modulate:a", 1.0, 0.5)
-
 
 func _process(_delta: float) -> void:
 	# Check for ENTER key press to start game
@@ -68,8 +53,6 @@ func _play_exit_animation() -> void:
 	tween.set_trans(Tween.TRANS_SINE)
 	tween.set_ease(Tween.EASE_IN)
 	
-	# Fade out all content
-	tween.tween_property(subtitle_label, "modulate:a", 0.0, 0.4)
 	tween.tween_property(prompt_label, "modulate:a", 0.0, 0.4)
 	
 	await tween.finished
